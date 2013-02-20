@@ -1,0 +1,186 @@
+﻿<UserControl x:Class="FunGraphs3D.SideBar"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:FunGraphs3D"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:helix="clr-namespace:HelixToolkit.Wpf;assembly=HelixToolkit.Wpf">
+    <UserControl.Resources>
+        <Style x:Key="sideMenuButton" TargetType="Button">
+            <Setter Property="Background" Value="#24262E"/>
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="BorderBrush" Value="#24262E" />
+
+                <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid>
+                            <Rectangle x:Name="sideMenuButton" Height="{TemplateBinding Height}" Width="{TemplateBinding Width}" Fill="{TemplateBinding Background}"/>
+                            <Border BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <EventTrigger RoutedEvent="MouseEnter" >
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)"
+                                                                To="#1d7cb5" Duration="00:00:0.2"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                            <EventTrigger RoutedEvent="MouseLeave">
+                                <BeginStoryboard>
+                                    <Storyboard >
+                                        <ColorAnimation Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)"
+                                                                To="{x:Null}" Duration="00:00:0.2"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Storyboard x:Key="popUpShow" >
+            <DoubleAnimation   Storyboard.TargetProperty="(UIElement.Opacity)"
+                               To="0.8" DecelerationRatio="0.5" Duration="00:00:0.5"/>
+            <DoubleAnimation   Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)"
+                               To="3" DecelerationRatio="0.5" Duration="00:00:0.5"/>
+            <DoubleAnimation   Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)"
+                               To="2.5" DecelerationRatio="0.5" Duration="00:00:0.5" />
+            <DoubleAnimation   Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[1].(TranslateTransform.X)"
+                               To="200" DecelerationRatio="0.5" Duration="00:00:0.5"/>
+        </Storyboard>
+
+        <Storyboard x:Key="popUpHide" >
+            <DoubleAnimation       Storyboard.TargetProperty="(UIElement.Opacity)"
+                                       To="0" DecelerationRatio="0.5" Duration="00:00:0.5"/>
+            <DoubleAnimation       Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)"
+                                       To="1" DecelerationRatio="0.5" Duration="00:00:0.5"/>
+            <DoubleAnimation       Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)"
+                                       To="1" DecelerationRatio="0.5" Duration="00:00:0.5" />
+            <DoubleAnimation       Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[1].(TranslateTransform.X)"
+                                       To="200" DecelerationRatio="0.5" Duration="00:00:0.5"/>
+        </Storyboard>
+
+        
+        <Style x:Key="popMenu" TargetType="ContentControl">
+            <Setter Property="Background" Value="#1d7cb5" />
+            <Setter Property="Opacity" Value="0" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ContentControl">
+                        <Grid>
+                            <Rectangle Fill="{TemplateBinding Background}"/>
+                            <Border BorderThickness="0" BorderBrush="#24262E">
+                                <ContentPresenter Content="{TemplateBinding Content}"/>
+                            </Border>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="RenderTransform">
+                <Setter.Value>
+                    <TransformGroup>
+                        <ScaleTransform />
+                        <TranslateTransform />
+                    </TransformGroup>
+                </Setter.Value>
+            </Setter>
+            <!--<Style.Triggers>
+                <EventTrigger RoutedEvent="MouseLeave">
+                    <BeginStoryboard Storyboard="{StaticResource popUpHide}" />
+                </EventTrigger>
+            </Style.Triggers>-->
+        </Style>
+        
+        <Style x:Key="popUpButton" TargetType="Button" BasedOn="{StaticResource sideMenuButton}" >
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="BorderBrush" Value="White"/>
+                    <Setter Property="BorderThickness" Value="1" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>   
+    
+    
+    <Grid >
+            
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+        
+        <ContentControl x:Name="entityForm" Style="{StaticResource popMenu}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="2*" />
+                    </Grid.ColumnDefinitions>
+                    <Label VerticalAlignment="Center" Foreground="White" >Name</Label>
+                    <TextBox Grid.Column="1" Margin="10"  Background="White" Text="{Binding EntityName}"/>
+                    <Label Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Foreground="White" >Color</Label>
+                <xctk:ColorPicker x:Name="colorPicker" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.5 0.5">
+                    <xctk:ColorPicker.RenderTransform>
+                        <ScaleTransform ScaleX="0.67" ScaleY="0.4"/>
+                    </xctk:ColorPicker.RenderTransform>
+                </xctk:ColorPicker>
+                <Button Grid.Row="2"  Grid.Column="0" Style="{StaticResource popUpButton}" FontSize="10" Content="Add" Click="Button_Click_8" />
+                <Button Grid.Row="2" Grid.Column="1" Style="{StaticResource popUpButton}" FontSize="10" Content="Cancel"  Click="Button_Click_9" />
+            </Grid>
+
+        </ContentControl>
+
+        <ContentControl x:Name="labelForm" Grid.Row="1"  Style="{StaticResource popMenu}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="2*" />
+                </Grid.ColumnDefinitions>
+                <Label VerticalAlignment="Center" Foreground="White">X-Axis</Label>
+                <TextBox Grid.Column="1" VerticalAlignment="Center" Margin="5" Background="White" Text="{Binding xAxis}"/>
+                <Label Grid.Row="1" VerticalAlignment="Center" Foreground="White" >Y-Axis</Label>
+                <TextBox Grid.Row="1" Grid.Column="1"  Margin="5" Background="White" Text="{Binding yAxis}"/>
+                <Label Grid.Row="2" VerticalAlignment="Center" Foreground="White" >Z-Axis</Label>
+                <TextBox Grid.Row="2" Grid.Column="1" Margin="5" Background="White" Text="{Binding zAxis}"/>
+               <Button Grid.Row="3" Grid.Column="0" Style="{StaticResource popUpButton}" FontSize="10" Content="Save" Click="Button_Click_10" />
+                <Button Grid.Row="3" Grid.Column="1" Style="{StaticResource popUpButton}" FontSize="10" Content="Cancel" Click="Button_Click_9" />
+            </Grid>
+               
+           
+        </ContentControl>
+
+            <Button  Style="{StaticResource sideMenuButton}" Content="Entity+" Click="Button_Click_2"/>
+            <Button Style="{StaticResource sideMenuButton}" Grid.Row="1" Content="Labels" Click="Button_Click_3"/>
+            <Button Style="{StaticResource sideMenuButton}" Grid.Row="4" Background="Red" Content="Compare(NI)" Click="Button_Click_1"/>
+            <Button Style="{StaticResource sideMenuButton}"  Grid.Row="2"  Content="Reset" Click="Button_Click_4"/>
+            <Button Style="{StaticResource sideMenuButton}"  Grid.Row="6" Background="Red" Content="Save(NI)" Click="Button_Click_5"/>
+            <Button Style="{StaticResource sideMenuButton}"  Grid.Row="5" Background="Red" Content="Help(NI)" Click="Button_Click_6"/>
+            <Button Style="{StaticResource sideMenuButton}"  Grid.Row="3" Content="Main Menu" Click="Button_Click_7"/>
+    </Grid>
+
+</UserControl>
