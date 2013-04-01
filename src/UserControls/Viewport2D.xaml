@@ -9,15 +9,16 @@
     <Grid>
         <helix:HelixViewport3D x:Name="myViewPort2D" ShowCoordinateSystem="True" Background="White" ShowViewCube="False" 
                                Loaded="myViewPort2D_Loaded_1" Cursor="Cross" MouseDown="myViewPort2D_MouseDown_1"
-                               MouseLeave="myViewPort2D_MouseLeave_1" MouseMove="myViewPort2D_MouseEnter_1" 
+                               MouseMove="myViewPort2D_MouseEnter_1" 
                                KeyDown="myViewPort2D_KeyDown_1"  Margin="10">
             <helix:HelixViewport3D.DefaultCamera>
                 <PerspectiveCamera Position="48,40,20" UpDirection="0,0,1" FieldOfView="80"/>
             </helix:HelixViewport3D.DefaultCamera>
             <helix:SunLight Altitude="45"/>
             <helix:SunLight Altitude="-45"/>
-
-            <helix:LinesVisual3D Color="Black" Thickness="2" IsRendering="True">
+            
+            <ModelVisual3D x:Name="blueBox">
+            <helix:LinesVisual3D Color="Black" Thickness="2">
                     <helix:LinesVisual3D.Points>
                         <Point3DCollection>
                             <Point3D X="0" Y="0" Z="0"/>
@@ -25,7 +26,7 @@
                         </Point3DCollection>
                     </helix:LinesVisual3D.Points>
                 </helix:LinesVisual3D>
-                <helix:LinesVisual3D Color="Black" Thickness="2" IsRendering="True">
+                <helix:LinesVisual3D Color="Black" Thickness="2">
                     <helix:LinesVisual3D.Points>
                         <Point3DCollection>
                             <Point3D X="0" Y="0" Z="0"/>
@@ -33,7 +34,7 @@
                         </Point3DCollection>
                     </helix:LinesVisual3D.Points>
                 </helix:LinesVisual3D>
-                <helix:LinesVisual3D Color="Black" Thickness="2" IsRendering="True">
+                <helix:LinesVisual3D Color="Black" Thickness="2">
                     <helix:LinesVisual3D.Points>
                         <Point3DCollection>
                             <Point3D X="0" Y="0" Z="0"/>
@@ -41,13 +42,13 @@
                         </Point3DCollection>
                     </helix:LinesVisual3D.Points>
                 </helix:LinesVisual3D>
-                <helix:GridLinesVisual3D x:Name="myPlane" Length="80" Width="40" Center="0,40,20" Thickness="0.06" Normal="1,0,0" LengthDirection="0,1,0" Fill="LightSkyBlue"/>
-            <helix:GridLinesVisual3D Length="80" Width="80" Center="40,40,0" Thickness="0.06" Normal="0,0,1" Fill="LightSkyBlue"/>
-            <helix:GridLinesVisual3D Length="80" Width="40" Center="40,0,20" Thickness="0.06" Normal="0,1,0" Fill="LightSkyBlue"/>
+            <helix:GridLinesVisual3D Length="80" Width="40" Center="0,40,20" MinorDistance="2" Thickness="0.06" Normal="1,0,0" LengthDirection="0,1,0" Fill="LightSkyBlue"/>
+            <helix:GridLinesVisual3D Length="80" Width="80" Center="40,40,0" MinorDistance="2" Thickness="0.06" Normal="0,0,1" Fill="LightSkyBlue"/>
+            <helix:GridLinesVisual3D Length="80" Width="40" Center="40,0,20" MinorDistance="2" Thickness="0.06" Normal="0,1,0" Fill="LightSkyBlue"/>
             <helix:RectangleVisual3D Length="85" Width="45" LengthDirection="0,1,0" Fill="MidnightBlue" Origin="-0.01,40,20"  Normal="1,0,0"/>
             <helix:RectangleVisual3D Length="85" Width="45" LengthDirection="1,0,0" Fill="MidnightBlue" Origin="40,-0.01,20"  Normal="0,1,0"/>
             <helix:RectangleVisual3D Length="85" Width="85" LengthDirection="0,1,0" Fill="MidnightBlue" Origin="40,40,-0.01"  Normal="0,0,1"/>
-
+            </ModelVisual3D>
         </helix:HelixViewport3D>
         
     </Grid>

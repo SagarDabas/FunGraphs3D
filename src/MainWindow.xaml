@@ -1,10 +1,8 @@
 ﻿<Window x:Class="FunGraphs3D.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:ed="http://schemas.microsoft.com/expression/2010/drawing"
-        xmlns:helix="clr-namespace:HelixToolkit.Wpf;assembly=HelixToolkit.Wpf"
         xmlns:local="clr-namespace:FunGraphs3D" WindowState="Maximized"
-        Title="MainWindow"  Loaded="HelixViewport3D_Loaded_1"
+        Title="MainWindow" Closing="Window_Closing_1" Loaded="HelixViewport3D_Loaded_1"
        >
     <Grid RenderTransformOrigin="0.5 0.5" >
             <local:MainMenu/>

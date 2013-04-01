@@ -70,6 +70,7 @@
         
         <Style x:Key="popMenu" TargetType="ContentControl">
             <Setter Property="Background" Value="#1d7cb5" />
+            <Setter Property="FontSize" Value="8" />
             <Setter Property="Opacity" Value="0" />
             <Setter Property="Template">
                 <Setter.Value>
@@ -127,56 +128,59 @@
         <ContentControl x:Name="entityForm" Style="{StaticResource popMenu}">
                 <Grid>
                     <Grid.RowDefinitions>
-                    <RowDefinition Height="2*"/>
-                    <RowDefinition Height="2*"/>
-                    <RowDefinition Height="1*"/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*"/>
                         <ColumnDefinition Width="2*" />
                     </Grid.ColumnDefinitions>
                     <Label VerticalAlignment="Center" Foreground="White" >Name</Label>
-                    <TextBox Grid.Column="1" Margin="10"  Background="White" Text="{Binding EntityName}"/>
-                    <Label Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Foreground="White" >Color</Label>
-                <xctk:ColorPicker x:Name="colorPicker" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.5 0.5">
-                    <xctk:ColorPicker.RenderTransform>
-                        <ScaleTransform ScaleX="0.67" ScaleY="0.4"/>
-                    </xctk:ColorPicker.RenderTransform>
-                </xctk:ColorPicker>
-                <Button Grid.Row="2"  Grid.Column="0" Style="{StaticResource popUpButton}" FontSize="10" Content="Add" Click="Button_Click_8" />
-                <Button Grid.Row="2" Grid.Column="1" Style="{StaticResource popUpButton}" FontSize="10" Content="Cancel"  Click="Button_Click_9" />
-            </Grid>
+                    <TextBox Grid.Column="1" Margin="10 2"  Background="White" Text="{Binding EntityName}"/>
+                    <Label Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Foreground="White" >Color</Label>
+                    <xctk:ColorPicker x:Name="colorPicker" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.5 0.5">
+                        <xctk:ColorPicker.RenderTransform>
+                            <ScaleTransform ScaleX="0.67" ScaleY="0.4"/>
+                        </xctk:ColorPicker.RenderTransform>
+                    </xctk:ColorPicker>
+                <Label Grid.Row="1" VerticalAlignment="Center" Foreground="White" >XLabel</Label>
+                <TextBox Grid.Row="1" Grid.Column="1" Margin="10 2"  Background="White" Text="{Binding XLabel}"/>
+                <Label Grid.Row="2" VerticalAlignment="Center" Foreground="White" >YLabel</Label>
+                <TextBox Grid.Row="2" Grid.Column="1" Margin="10 2"  Background="White" Text="{Binding YLabel}"/>
+                <Button Grid.Row="4"  Grid.Column="0" Style="{StaticResource popUpButton}" FontSize="8" Content="Add" Click="Button_Click_8" />
+                <Button Grid.Row="4" Grid.Column="1" Style="{StaticResource popUpButton}" FontSize="8" Content="Edit"  Click="Button_Click_9" />
+                </Grid>
 
         </ContentControl>
 
         <ContentControl x:Name="labelForm" Grid.Row="1"  Style="{StaticResource popMenu}">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="2*"/>
-                    <RowDefinition Height="2*"/>
-                    <RowDefinition Height="2*"/>
-                    <RowDefinition Height="1*"/>
-                    </Grid.RowDefinitions>
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="1*" />
+                </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="2*" />
                 </Grid.ColumnDefinitions>
-                <Label VerticalAlignment="Center" Foreground="White">X-Axis</Label>
-                <TextBox Grid.Column="1" VerticalAlignment="Center" Margin="5" Background="White" Text="{Binding xAxis}"/>
-                <Label Grid.Row="1" VerticalAlignment="Center" Foreground="White" >Y-Axis</Label>
-                <TextBox Grid.Row="1" Grid.Column="1"  Margin="5" Background="White" Text="{Binding yAxis}"/>
-                <Label Grid.Row="2" VerticalAlignment="Center" Foreground="White" >Z-Axis</Label>
-                <TextBox Grid.Row="2" Grid.Column="1" Margin="5" Background="White" Text="{Binding zAxis}"/>
-               <Button Grid.Row="3" Grid.Column="0" Style="{StaticResource popUpButton}" FontSize="10" Content="Save" Click="Button_Click_10" />
-                <Button Grid.Row="3" Grid.Column="1" Style="{StaticResource popUpButton}" FontSize="10" Content="Cancel" Click="Button_Click_9" />
+                <Label VerticalAlignment="Center" Foreground="White">X Scale</Label>
+                <TextBox Grid.Column="1" VerticalAlignment="Center" Margin="10 0" Background="White" Text="{Binding XScale}"/>
+                <Label Grid.Row="1" VerticalAlignment="Center" Foreground="White" >Y Scale</Label>
+                <TextBox Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Margin="10 0" Background="White" Text="{Binding YScale}"/>
+                <Button Grid.Row="2" Grid.Column="0"  Margin="5" Style="{StaticResource popUpButton}" FontSize="8" Content="Save" Click="Button_Click_10" />
+                <Button Grid.Row="2" Grid.Column="1"  Margin="5" Style="{StaticResource popUpButton}" FontSize="8" Content="Cancel" Click="Button_Click_9" />
             </Grid>
                
            
         </ContentControl>
 
             <Button  Style="{StaticResource sideMenuButton}" Content="Entity+" Click="Button_Click_2"/>
-            <Button Style="{StaticResource sideMenuButton}" Grid.Row="1" Content="Labels" Click="Button_Click_3"/>
-            <Button Style="{StaticResource sideMenuButton}" Grid.Row="4" Background="Red" Content="Compare(NI)" Click="Button_Click_1"/>
+            <Button Style="{StaticResource sideMenuButton}" Grid.Row="1" Content="Unit Scale" Click="Button_Click_3"/>
+            <Button Style="{StaticResource sideMenuButton}" Grid.Row="4" Content="Compare" Click="Button_Click_1"/>
             <Button Style="{StaticResource sideMenuButton}"  Grid.Row="2"  Content="Reset" Click="Button_Click_4"/>
             <Button Style="{StaticResource sideMenuButton}"  Grid.Row="6" Background="Red" Content="Save(NI)" Click="Button_Click_5"/>
             <Button Style="{StaticResource sideMenuButton}"  Grid.Row="5" Background="Red" Content="Help(NI)" Click="Button_Click_6"/>

@@ -11,16 +11,16 @@ namespace FunGraphs3D
     {
 
         /// <summary>
-        /// Identifies the <see cref="InnerRadius"/> dependency property.
+        /// Identifies the <see cref="VerticalLengthProperty"/> dependency property.
         /// </summary>
         public static readonly DependencyProperty VerticalLengthProperty = DependencyProperty.Register(
             "VerticalLength", typeof(double), typeof(PieSlice3D), new UIPropertyMetadata(2.0, GeometryChanged));
 
 
         /// <summary>
-        /// Gets or sets the outer radius.
+        /// Gets or sets the vertical length.
         /// </summary>
-        /// <value>The outer radius.</value>
+        /// <value>The vertical length.</value>
         public double VerticalLength
         {
             get

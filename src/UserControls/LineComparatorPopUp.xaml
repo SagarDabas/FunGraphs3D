@@ -4,27 +4,13 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d">
-    <UserControl.Resources>
-        <DataTemplate x:Key="lineEntityTemplate" DataType="x:Type int">
-            <StackPanel>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition />
-                    </Grid.RowDefinitions>
-                   <!--<Label Content="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplatedParent.(ItemsControl.AlternationIndex)}" />-->
-                    <Label Grid.Column="1" Content="{Binding}" />
-                </Grid>
-            </StackPanel>
-        </DataTemplate>
-    </UserControl.Resources>
-    <Grid>
-        <Popup Height="300" Width="300"  x:Name="LinePopUp" IsOpen="True" Placement="Center" >
-            <ListBox Background="Azure" ItemsSource="{Binding Path=entityData}" AlternationCount="{Binding Path=entityData.Count}"
-                     ItemTemplate="{StaticResource lineEntityTemplate}" />
+    <Grid Background="Gray" Opacity="0.3" MouseDown="Grid_MouseDown_1">
+        <Popup x:Name="LinePopUp" IsOpen="True" Placement="Relative" Width="{Binding ActualWidth,RelativeSource={RelativeSource 
+               Mode=FindAncestor, AncestorType=Grid}}" Height="{Binding ActualHeight,RelativeSource={RelativeSource
+               Mode=FindAncestor, AncestorType=Grid}}" AllowsTransparency="True">
+            <ScrollViewer VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Auto">
+                <Grid x:Name="LinePopUpGrid" Opacity="0.9" />
+            </ScrollViewer>
         </Popup>
     </Grid>
 </UserControl>

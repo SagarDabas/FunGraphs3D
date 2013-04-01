@@ -1,0 +1,47 @@
+﻿<UserControl x:Class="FunGraphs3D.SidebarRight"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:FunGraphs3D"
+             mc:Ignorable="d">
+    <Grid x:Name="grid">
+        <Grid.Resources>
+        <local:ColorToSolidColorBrushValueConverter  x:Key="colorConverter"/>
+        </Grid.Resources>
+        <ListBox x:Name="listBox" ItemsSource="{Binding Entities}" ScrollViewer.HorizontalScrollBarVisibility="Disabled"  SelectionChanged="ListBox_SelectionChanged_1" Background="LightGray">
+            <ListBox.ItemTemplate>
+                <DataTemplate >
+                    <Grid  Width="{Binding ActualWidth,RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Grid}}" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="20*"/>
+                            <ColumnDefinition Width="80*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Content="{Binding Percentage}" Margin="0 5 0 5" Background="{Binding TheColor, Converter={StaticResource colorConverter}}" />
+                        <Label Margin="0 5 0 5" Grid.Column="1" Content="{Binding Title}" Background="#24262E" Foreground="White">
+                            <Label.Triggers>
+                                <EventTrigger RoutedEvent="MouseEnter" >
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <ColorAnimation Storyboard.TargetProperty="(Label.Background).(SolidColorBrush.Color)"
+                                                                To="#1d7cb5" Duration="00:00:0.2"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                                <EventTrigger RoutedEvent="MouseLeave">
+                                    <BeginStoryboard>
+                                        <Storyboard >
+                                            <ColorAnimation Storyboard.TargetProperty="(Label.Background).(SolidColorBrush.Color)"
+                                                                To="{x:Null}" Duration="00:00:0.2"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </Label.Triggers>
+                        </Label>
+                    
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
+</UserControl>

@@ -14,44 +14,44 @@ namespace FunGraphs3D
     /// </summary>
     public partial class SideBar : UserControl
     {
-        private AbstractChartRenderer renderer;
         private Storyboard storyBoard;
         private ContentControl current;
-        public static readonly DependencyProperty EntityNameProperty = DependencyProperty.Register("EntityName", typeof(String), typeof(SideBar));
-        public static readonly DependencyProperty xAxisProperty = DependencyProperty.Register("xAxis", typeof(String), typeof(SideBar));
-        public static readonly DependencyProperty yAxisProperty = DependencyProperty.Register("yAxis", typeof(String), typeof(SideBar));
-        public static readonly DependencyProperty zAxisProperty = DependencyProperty.Register("zAxis", typeof(String), typeof(SideBar));
-
+        public static readonly DependencyProperty EntityProperty = DependencyProperty.Register("EntityName", typeof(String), typeof(SideBar));
+        public static readonly DependencyProperty XLabelProperty = DependencyProperty.Register("XLabel", typeof(String), typeof(SideBar));
+        public static readonly DependencyProperty YLabelProperty = DependencyProperty.Register("YLabel", typeof(String), typeof(SideBar));
+        private float xScale = 1;
+        private float yScale = 1;
+        
          public String EntityName
          {
-             get { return (String)base.GetValue(EntityNameProperty);}
-             set { base.SetValue(EntityNameProperty, value);}
+             get { return (String)base.GetValue(EntityProperty); }
+             set { base.SetValue(EntityProperty, value); }
          }
-         public String xAxis
+         public String XLabel
          {
-             get { return (String)base.GetValue(xAxisProperty);}
-             set { base.SetValue(xAxisProperty, value); }
+             get { return (String)base.GetValue(XLabelProperty); }
+             set { base.SetValue(XLabelProperty, value); }
          }
-         public String yAxis
+         public String YLabel
          {
-             get { return (String)base.GetValue(yAxisProperty); }
-             set { base.SetValue(yAxisProperty, value);}
+             get { return (String)base.GetValue(YLabelProperty); }
+             set { base.SetValue(YLabelProperty, value); }
          }
 
-         public String zAxis
+         public float XScale
          {
-             get { return (String)base.GetValue(zAxisProperty);}
-             set { base.SetValue(zAxisProperty, value);}
+             get { return xScale; }
+             set { xScale = value; }
          }
-        
+         public float YScale
+         {
+             get { return yScale; }
+             set { yScale = value; }
+         }
+
         public SideBar()
         {
             InitializeComponent();
-            this.renderer = Utility.chartRenderer;
-            EntityName = "Dummy";
-            xAxis = "X - Axis";
-            yAxis = "Y - Axis";
-            zAxis = "Z - Axis";
             Utility.viewport.PropertyChanged += delegate(Object o ,PropertyChangedEventArgs e)
             {
                 hideCurrent();
@@ -59,9 +59,17 @@ namespace FunGraphs3D
             DataContext = this;
         }
 
+        public void setDefaultValues()
+        {
+            EntityName = Utility.chartRenderer.activeEntity.Title;
+            XLabel = Utility.chartRenderer.activeEntity.Label1;
+            YLabel = Utility.chartRenderer.activeEntity.Label2;
+            colorPicker.SelectedColor = Utility.chartRenderer.activeEntity.TheColor;
+        }
+
         private void Button_Click_1(object sender, System.Windows.RoutedEventArgs e)
         {
-            //renderer.showCompareResult();
+             Utility.chartRenderer.showCompareResult();
         }
 
         private void Button_Click_2(object sender, System.Windows.RoutedEventArgs e)
@@ -82,10 +90,7 @@ namespace FunGraphs3D
 
         private void Button_Click_4(object sender, System.Windows.RoutedEventArgs e)
         {
-            CameraController controller = Utility.viewport.myViewPort2D.CameraController;
-            controller.CameraPosition = new Point3D(48,40,20);
-            controller.CameraUpDirection = new Vector3D(0,0,1);
-            controller.CameraTarget = new Point3D(0, 40, 20);
+            Utility.chartRenderer.initViewport(sender,e);
         }
 
         private void Button_Click_5(object sender, System.Windows.RoutedEventArgs e)
@@ -106,12 +111,13 @@ namespace FunGraphs3D
 
         private void Button_Click_8(object sender, System.Windows.RoutedEventArgs e)
         {
-            renderer.addEntity(EntityName,colorPicker.SelectedColor);
+            Utility.chartRenderer.addEntity(false, EntityName, colorPicker.SelectedColor, XLabel, YLabel);
             hideCurrent();
         }
 
         private void Button_Click_9(object sender, System.Windows.RoutedEventArgs e)
         {
+            Utility.chartRenderer.addEntity(true, EntityName, colorPicker.SelectedColor, XLabel, YLabel);
             hideCurrent();
         }
 
@@ -126,7 +132,11 @@ namespace FunGraphs3D
 
         private void Button_Click_10(object sender, RoutedEventArgs e)
         {
-            Utility.setLabels(xAxis,yAxis,zAxis);
+            //Change it to 3D -- Utility.chartRenderer.setScales(XScale,YScale,XScale);
+            Utility.chartRenderer.setScales(XScale,YScale);
+            //overwriting numbers. Rethink about it. Previous numbers are not yet removed.
+            Utility.chartRenderer.updateNumbers();
+            hideCurrent();
         }
 
 

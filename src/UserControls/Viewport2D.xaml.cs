@@ -15,46 +15,42 @@ namespace FunGraphs3D
     /// </summary>
     public partial class Viewport2D : UserControl, INotifyPropertyChanged
     {
-        AbstractChartRenderer renderer;
         public Viewport2D()
         {
             InitializeComponent();
-            renderer = Utility.chartRenderer;
         }
 
         private void myViewPort2D_Loaded_1(object sender, RoutedEventArgs e)
         {
-            renderer.initViewport(sender, e);
+            Utility.chartRenderer.initViewport(sender, e);
         }
 
         private void myViewPort2D_MouseDown_1(object sender, MouseButtonEventArgs e)
         {
             IsSidebar = !IsSidebar;
-            renderer.mouseDown(sender, e);    
+            Utility.chartRenderer.mouseDown(sender, e);    
         }
 
         //It's actually MouseMove
          private void myViewPort2D_MouseEnter_1(object sender, MouseEventArgs e)
         {
-            renderer.mouseMove(sender, e);
+            Utility.chartRenderer.mouseMove(sender, e);
         }
-
-        private void myViewPort2D_MouseLeave_1(object sender, MouseEventArgs e)
-        {
-            renderer.mouseLeave(sender, e);
-        }
- 
 
         private void myViewPort2D_KeyDown_1(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Escape)
             {
-                renderer.escDown(sender, e);
+                Utility.chartRenderer.escDown(sender, e);
+            }
+            else if (e.Key == Key.Delete)
+            {
+                Utility.chartRenderer.delDown(sender, e);
             }
         }
 
         private bool isSidebar;
-        private bool IsSidebar
+        public bool IsSidebar
         {
             get
             {

@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:FunGraphs3D"
-            xmlns:helix="clr-namespace:HelixToolkit.Wpf;assembly=HelixToolkit.Wpf"
+             xmlns:helix="clr-namespace:HelixToolkit.Wpf;assembly=HelixToolkit.Wpf"
              mc:Ignorable="d">
     
     <UserControl.Resources>
@@ -87,13 +87,12 @@
         </Storyboard>
     </UserControl.Resources>
     <Grid>
-        <helix:HelixViewport3D  ShowViewCube="False" IsPanEnabled="False" IsRotationEnabled="False" IsZoomEnabled="False">
+        <helix:HelixViewport3D  ShowViewCube="False" >
             <helix:HelixViewport3D.DefaultCamera>
                 <PerspectiveCamera Position="80,30,30" UpDirection="0,0,1" LookDirection="-80,-30,-30" FieldOfView="80"/>
             </helix:HelixViewport3D.DefaultCamera>
             <helix:DefaultLights/>
-            <local:AreaChart Point1="0,0,8" Point2="0,-10,11" Fill="Lavender" OnAxis="0,1,0"  Extrusion="2"/>
-
+            
             <local:PieSlice3D Center="16,0,0" Fill="Red" InnerRadius="1" 
                                      OuterRadius="5"  StartAngle="90" 
                                     EndAngle="180" ThetaDiv="15"/>
@@ -116,9 +115,19 @@
                                      LengthDirection="1,0,0"/>
             <helix:TextVisual3D Text="FunGraphs3D"  TextDirection="1,0,0" Position="17,-50,10" Height="7" FontSize="80"/>
 
+            <local:AreaChart Extrusion="2" IsRender="True" Fill="Yellow">
+                <local:AreaChart.PointsList>
+                    <Point3DCollection>
+                        <Point3D X="0" Y="0" Z="8"/>
+                        <Point3D X="0" Y="-10" Z="11"/>
+                        <Point3D X="0" Y="-15" Z="7"/>
+                    </Point3DCollection>
+                </local:AreaChart.PointsList>
+            </local:AreaChart>
+
         </helix:HelixViewport3D>
 
-        <Grid Height="500" Width="500" >
+        <Grid Height="500" Width="500">
         
         <Grid RenderTransformOrigin="0.5 0.5">
 
